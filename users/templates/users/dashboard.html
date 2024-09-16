@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <h1>Welcome, {{ user.username }}</h1>
+    <p>Your current balance is: ${{ user.balance }}</p>
+    <p><a href="{% url 'logout' %}">Logout</a></p>
+</body>
+
+</html>

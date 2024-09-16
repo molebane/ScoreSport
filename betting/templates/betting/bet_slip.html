@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Bet Slip{% endblock %}
+
+{% block content %}
+<h1>Your Bet Slip</h1>
+
+{% if bet_slip %}
+<ul class="list-group">
+    {% for bet in bet_slip.bets.all %}
+    <li class="list-group-item">
+        {{ bet.match.team_a }} vs {{ bet.match.team_b }} - Bet: ${{ bet.bet_amount }} on {{ bet.odds.outcome }}
+    </li>
+    {% endfor %}
+</ul>
+
+<p class="mt-3"><strong>Total Bet Amount: ${{ bet_slip.total_bet_amount }}</strong></p>
+{% else %}
+<p class="text-muted">No bets placed yet.</p>
+{% endif %}
+
+<a href="{% url 'betting:match_list' %}" class="btn btn-secondary mt-3">Back to Matches</a>
+{% endblock %}

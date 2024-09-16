@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Betting History{% endblock %}
+
+{% block content %}
+<h1>Your Betting History</h1>
+
+<ul class="list-group">
+    {% for bet in bets %}
+    <li class="list-group-item">
+        {{ bet.match.team_a }} vs {{ bet.match.team_b }} - Bet: ${{ bet.bet_amount }} on {{ bet.odds.outcome }} |
+        {% if bet.is_winner %}
+        <strong class="text-success">Won!</strong> Payout: ${{ bet.payout }}
+        {% else %}
+        <strong class="text-danger">Lost</strong>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'betting:match_list' %}" class="btn btn-secondary mt-3">Back to Matches</a>
+{% endblock %}

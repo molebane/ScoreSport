@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Upcoming Matches{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <h1 class="text-center mb-4">Upcoming Matches</h1>
+    <div class="row">
+        {% for match in matches %}
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <!-- Team A image and name -->
+                    <div class="d-flex align-items-center">
+                        <img src="{{ match.team_a_image.url }}" alt="{{ match.team_a }}"
+                            class="img-fluid rounded-circle" style="width: 80px; height: 80px; object-fit: cover;">
+                        <span class="ml-3 font-weight-bold">{{ match.team_a }}</span>
+                    </div>
+
+                    <div class="text-center mx-3">
+                        <span class="font-weight-bold">vs</span>
+                    </div>
+
+                    <!-- Team B image and name -->
+                    <div class="d-flex align-items-center">
+                        <span class="mr-3 font-weight-bold">{{ match.team_b }}</span>
+                        <img src="{{ match.team_b_image.url }}" alt="{{ match.team_b }}"
+                            class="img-fluid rounded-circle" style="width: 80px; height: 80px; object-fit: cover;">
+                    </div>
+                </div>
+
+                <div class="card-footer text-center">
+                    <a href="{% url 'betting:match_detail' match.id %}" class="btn btn-primary btn-sm">Bet Now</a>
+                    <p class="mt-2 text-muted">{{ match.start_time|date:"M d, Y - H:i" }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
